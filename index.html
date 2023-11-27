@@ -1,79 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <header class="header">
-            <div class="header__top">
-                <h1 class="header__title">To Do List</h1>
+      <header class="header">
+        <div class="header__top">
+          <h1 class="header__title">To Do List</h1>
+        </div>
+        <div class="header__bottom">
+          <form class="date-form">
+            <label class="date-form__label" id="date-label" for="date-input"
+              >DATE</label
+            >
+            <input
+              id="date-input"
+              class="date-form__input"
+              type="date"
+              name="date"
+            />
+          </form>
+          <button class="header__refresh-btn">
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+        </div>
+      </header>
+      <main class="main">
+        <div class="tasks-list">
+          <div class="tasks-list__item">
+            <input class="tasks-list__item-input" type="text" value="VALUE" />
+            <div class="tasks-list__item-buttons-wrapper">
+              <button class="tasks-list__item-complete-btn">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-regular fa-circle"></i>
+              </button>
+              <button class="tasks-list__item-trash-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
-            <div class="header__bottom">
-                <form class="date-form">
-                    <label class="date-form__label" id="date-label" for="date-input">DATE</label>
-                    <input class="date-form__input" type="date" name="date" id="date-input" >
-                </form>
-                <button class="header__refresh-btn">
-                    <i class="fa-solid fa-arrows-rotate"></i>
-                </button>
+          </div>
+          <div class="tasks-list__item">
+            <input class="tasks-list__item-input" type="text" value="VALUE" />
+            <div class="tasks-list__item-buttons-wrapper">
+              <button class="tasks-list__item-complete-btn">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-regular fa-circle"></i>
+              </button>
+              <button class="tasks-list__item-trash-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
-            
-        </header>
-        <main class="main">
-            <div class="tasks-list">
-                <div class="tasks-list__item">
-                    <input class="tasks-list__item-input" type="text" value="VALUE">
-                    <div class="tasks-list__item-buttons-wrapper">
-                        <button class="tasks-list__item-complete-btn">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <i class="fa-regular fa-circle"></i>
-                        </button>
-                        <button class="tasks-list__item-trash-btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="tasks-list__item">
-                    <input class="tasks-list__item-input" type="text" value="VALUE">
-                    <div class="tasks-list__item-buttons-wrapper">
-                        <button class="tasks-list__item-complete-btn">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <i class="fa-regular fa-circle"></i>
-                        </button>
-                        <button class="tasks-list__item-trash-btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="tasks-list__item">
-                    <input class="tasks-list__item-input" type="text" value="VALUE">
-                    <div class="tasks-list__item-buttons-wrapper">
-                        <button class="tasks-list__item-complete-btn">
-                            <i class="fa-solid fa-circle-check"></i>
-                            <i class="fa-regular fa-circle"></i>
-                        </button>
-                        <button class="tasks-list__item-trash-btn">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
+          </div>
+          <div class="tasks-list__item">
+            <input class="tasks-list__item-input" type="text" value="VALUE" />
+            <div class="tasks-list__item-buttons-wrapper">
+              <button class="tasks-list__item-complete-btn">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-regular fa-circle"></i>
+              </button>
+              <button class="tasks-list__item-trash-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
             </div>
-        </main>
-        <footer class="footer">
-            <form id="adding-form" class="adding-form">
-                <button id="add-btn" class="adding-form__btn">
-                    <i class="fa-solid fa-circle-plus"></i>
-                </button>
-                <input id="add-input" class="adding-form__input" placeholder="Add new item" type="text">
-            </form>
-        </footer>
+          </div>
+        </div>
+      </main>
+      <footer class="footer">
+        <form id="adding-form" class="adding-form">
+          <button id="add-btn" class="adding-form__btn">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
+          <input
+            id="add-input"
+            class="adding-form__input"
+            name="add-task-input"
+            placeholder="Add new item"
+            type="text"
+          />
+        </form>
+      </footer>
     </div>
 
     <script src="app.js" type="module"></script>
-</body>
+  </body>
 </html>

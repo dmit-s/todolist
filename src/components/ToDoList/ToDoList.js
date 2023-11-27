@@ -15,17 +15,24 @@ class ToDoList {
 
   addTask(e) {
     e.preventDefault();
-    console.log(123);
+    const formData = new FormData(e.target);
+    const inputValue = formData.get("add-task-input");
 
-    const task = { text: "DSOADOASD", completed: false };
-    const dateId = this.inputEL.value.split("-");
-    const tasksStorage = localStorage.getItem("Tasks");
+    const task = {
+      id: crypto.randomUUID(),
+      text: inputValue,
+      completed: false,
+    };
 
-    if (!tasksStorage.getItem("Tasks")) {
+    const dateId = this.inputEL.value.split("-").join("");
+    const tasksStorage = JSON.parse(localStorage.getItem("Tasks"));
+
+    if (!tasksStorage) {
+      console.log(dateId);
       const obj = {
         [dateId]: [task],
       };
-      tasksStorage.setItem("Tasks", obj);
+      localStorage.setItem("Tasks", JSON.stringify(obj));
       return;
     }
 
@@ -35,7 +42,7 @@ class ToDoList {
       tasksStorage[dateId] = [task];
     }
 
-    localStorage.setItem("Tasks", tasksStorage);
+    localStorage.setItem("Tasks", JSON.stringify(tasksStorage));
   }
 }
 
