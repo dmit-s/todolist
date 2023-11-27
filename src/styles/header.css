@@ -1,0 +1,38 @@
+.header{
+    
+    width: 100%;
+}
+
+.header__top{
+    background-color: #f1af36;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem 0;
+}
+
+.header__bottom{
+    display: flex;
+    justify-content: space-between;
+    background-color: #ffd79a;
+    padding: 1rem 2rem;
+    box-shadow: 0 3px 10px #a5a5a5;
+
+}
+
+.date-form__input{
+    opacity: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.date-form__label{
+    font-size: 1.25rem;
+    cursor: pointer;
+
+}
+
+.header__refresh-btn{
+    font-size: 1.5rem;
+}
