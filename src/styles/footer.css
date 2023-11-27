@@ -3,12 +3,12 @@
     width: 100%;
 }
 
-.footer__content{
+.adding-form{
     display: flex;
     justify-content: center;
 }
 
-.footer__add-input{
+.adding-form__input{
     border: 0;
     background: 0;
     width: 50%;
@@ -21,7 +21,7 @@
 
 }
 
-.footer__add-input::before{
+.adding-form__input::before{
     content: '';
     display: block;
     width: 100%;
@@ -30,5 +30,15 @@
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.adding-form__btn{
+    font-size: 1.8rem;
+    color: #535a8f;
+    margin-right: .5rem;
+}
+
+.adding-form__btn:hover{
+    color: #5561b7;
 }
 

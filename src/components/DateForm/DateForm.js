@@ -31,7 +31,6 @@ class DateForm{
 
     changeDate(e){
         let date = new Date(e.target.value);
-        console.log(e.target.checked);
 
         if(isNaN(date)){
             date = new Date();

@@ -1,4 +1,6 @@
 import DateFormInstance from "./src/components/DateForm/DateForm.js";
+import ToDoList from "./src/components/ToDoList/ToDoList.js";
+
 
 class App{
     constructor(){
@@ -7,6 +9,7 @@ class App{
 
     init(){
         DateFormInstance.init();
+        ToDoList.init();
     }
 }
 
