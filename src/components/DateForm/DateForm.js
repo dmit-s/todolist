@@ -1,4 +1,7 @@
-class DateForm {
+import { ToDoList } from '../ToDoList/ToDoList.js';
+
+
+class DateForm extends ToDoList {
   static days = [
     "Sunday",
     "Monday",
@@ -24,13 +27,14 @@ class DateForm {
   ];
 
   constructor() {
+    super();
     this.inputEL = document.getElementById("date-input");
     this.labelEl = document.getElementById("date-label");
   }
 
   init() {
     this.attachEvents();
-    this.changeDate(this.inputEL);
+    this.setInitialDate();
   }
 
   attachEvents() {
@@ -41,35 +45,47 @@ class DateForm {
   }
 
   formatDate(date) {
-    const dd = date.getDate();
-    const mm = date.getMonth() + 1;
+    const dd = new Intl.NumberFormat("en", { minimumIntegerDigits: 2 }).format(
+      date.getDate()
+    );
+    const mm = new Intl.NumberFormat("en", { minimumIntegerDigits: 2 }).format(
+      date.getMonth() + 1
+    );
     const yyyy = date.getFullYear();
 
     return `${yyyy}-${mm}-${dd}`;
   }
 
-  changeDate(e) {
-    const target = e.target;
-    let date = target ? new Date(target.value) : new Date(e.value);
-
-    if (isNaN(date)) {
-      date = new Date();
-      this.inputEL.value = this.formatDate(date);
+  setInitialDate() {
+    const savedDate = localStorage.getItem("Current Date");
+    if (savedDate) {
+      this.inputEL.value = savedDate;
+      this.updateDate(new Date(savedDate));
+    } else {
+      this.changeDate();
     }
+  }
 
+  changeDate() {
+    let date = isNaN(new Date(this.inputEL.value))
+      ? new Date()
+      : new Date(this.inputEL.value);
+    const formattedDate = this.formatDate(date);
+    console.log(formattedDate);
+    this.inputEL.value = formattedDate;
+
+    localStorage.setItem("Current Date", formattedDate);
+
+    this.updateDate(date);
+    this.renderTasks();
+  }
+
+  updateDate(date) {
     const dayWeek = date.getDay();
     const dayNumber = date.getDate();
     const month = date.getMonth();
-    const year = date.getFullYear();
 
     this.labelEl.innerText = `${DateForm.days[dayWeek]}, ${DateForm.months[month]} ${dayNumber}`;
-
-    // const splited = this.inputEL.value.split('-');
-    // const dateObj = {
-    //     day: splited[2],
-    //     month: splited[1],
-    //     year: splited[0]
-    // }
   }
 }
 
