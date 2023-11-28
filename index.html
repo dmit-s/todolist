@@ -22,7 +22,7 @@
         <div class="header__bottom">
           <form class="date-form">
             <label class="date-form__label" id="date-label" for="date-input"
-              >DATE</label
+              ></label
             >
             <input
               id="date-input"
@@ -31,49 +31,13 @@
               name="date"
             />
           </form>
-          <button class="header__refresh-btn">
+          <button id="refresh-tasks-btn" class="header__refresh-btn">
             <i class="fa-solid fa-arrows-rotate"></i>
           </button>
         </div>
       </header>
       <main class="main">
-        <div class="tasks-list">
-          <div class="tasks-list__item">
-            <input class="tasks-list__item-input" type="text" value="VALUE" />
-            <div class="tasks-list__item-buttons-wrapper">
-              <button class="tasks-list__item-complete-btn">
-                <i class="fa-solid fa-circle-check"></i>
-                <i class="fa-regular fa-circle"></i>
-              </button>
-              <button class="tasks-list__item-trash-btn">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
-          <div class="tasks-list__item">
-            <input class="tasks-list__item-input" type="text" value="VALUE" />
-            <div class="tasks-list__item-buttons-wrapper">
-              <button class="tasks-list__item-complete-btn">
-                <i class="fa-solid fa-circle-check"></i>
-                <i class="fa-regular fa-circle"></i>
-              </button>
-              <button class="tasks-list__item-trash-btn">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
-          <div class="tasks-list__item">
-            <input class="tasks-list__item-input" type="text" value="VALUE" />
-            <div class="tasks-list__item-buttons-wrapper">
-              <button class="tasks-list__item-complete-btn">
-                <i class="fa-solid fa-circle-check"></i>
-                <i class="fa-regular fa-circle"></i>
-              </button>
-              <button class="tasks-list__item-trash-btn">
-                <i class="fa-solid fa-trash"></i>
-              </button>
-            </div>
-          </div>
+        <div id="tasks-list" class="tasks-list">
         </div>
       </main>
       <footer class="footer">
