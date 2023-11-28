@@ -1,44 +1,48 @@
-.footer{
-    padding: 2rem 0;
-    width: 100%;
+.footer {
+  padding: 2rem 0;
+  width: 100%;
 }
 
-.adding-form{
-    display: flex;
-    justify-content: center;
+.adding-form {
+  display: flex;
+  justify-content: center;
 }
 
-.adding-form__input{
-    border: 0;
-    background: 0;
-    width: 50%;
-    outline: 0;
-    font-size: 1.2rem;
-    position: relative;
-    padding: 0 .5rem;
-    box-shadow: 0 0 3px #000;
-    border-radius: 5px;
-
+.adding-form__input {
+  border: 0;
+  background: 0;
+  width: 50%;
+  outline: 0;
+  font-size: 1.2rem;
+  position: relative;
+  padding: 0 0.5rem;
+  box-shadow: 0 0 3px #000;
+  border-radius: 5px;
+  transition: 0.4s;
 }
 
-.adding-form__input::before{
-    content: '';
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #f57b7b;
-    position: absolute;
-    top: 0;
-    left: 0;
+.adding-form__input:disabled {
+  background-color: #e1e1e1;
+  cursor: no-drop;
 }
 
-.adding-form__btn{
-    font-size: 1.8rem;
-    color: #535a8f;
-    margin-right: .5rem;
+.adding-form__input::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #f57b7b;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-.adding-form__btn:hover{
-    color: #5561b7;
+.adding-form__btn {
+  font-size: 1.8rem;
+  color: #535a8f;
+  margin-right: 0.5rem;
 }
 
+.adding-form__btn:hover {
+  color: #5561b7;
+}
