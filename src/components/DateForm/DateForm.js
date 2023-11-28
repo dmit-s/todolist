@@ -1,5 +1,4 @@
-import { ToDoList } from '../ToDoList/ToDoList.js';
-
+import { ToDoList } from "../ToDoList/ToDoList.js";
 
 class DateForm extends ToDoList {
   static days = [
@@ -77,7 +76,8 @@ class DateForm extends ToDoList {
     localStorage.setItem("Current Date", formattedDate);
 
     this.updateDate(date);
-    this.renderTasks();
+    this.selectEl.value = "all";
+    this.filterTasks();
   }
 
   updateDate(date) {

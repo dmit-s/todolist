@@ -21,9 +21,11 @@
         </div>
         <div class="header__bottom">
           <form class="date-form">
-            <label class="date-form__label" id="date-label" for="date-input"
-              ></label
-            >
+            <label
+              class="date-form__label"
+              id="date-label"
+              for="date-input"
+            ></label>
             <input
               id="date-input"
               class="date-form__input"
@@ -31,14 +33,24 @@
               name="date"
             />
           </form>
-          <button id="refresh-tasks-btn" class="header__refresh-btn">
-            <i class="fa-solid fa-arrows-rotate"></i>
-          </button>
+          <div class="header__bottom-buttons">
+            <select id="tasks-select" class="tasks-select" name="tasks">
+              <option class="tasks-select__option" value="all">All</option>
+              <option class="tasks-select__option" value="completed">
+                Completed
+              </option>
+              <option class="tasks-select__option" value="unfinished">
+                Unfinished
+              </option>
+            </select>
+            <button id="refresh-tasks-btn" class="header__refresh-btn">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button>
+          </div>
         </div>
       </header>
       <main class="main">
-        <div id="tasks-list" class="tasks-list">
-        </div>
+        <div id="tasks-list" class="tasks-list"></div>
       </main>
       <footer class="footer">
         <form id="adding-form" class="adding-form">

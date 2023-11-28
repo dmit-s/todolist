@@ -5,22 +5,26 @@ export class ToDoList {
     this.addingFormEl = document.getElementById("adding-form");
     this.tasksList = document.getElementById("tasks-list");
     this.refreshBtn = document.getElementById("refresh-tasks-btn");
+    this.selectEl = document.getElementById("tasks-select");
   }
 
   init() {
     this.attachEvents();
-    this.renderTasks();
+    // this.renderTasks();
+    this.setInitialSelect();
   }
 
   attachEvents() {
     this.addingFormEl.addEventListener("submit", this.addTask.bind(this));
     this.refreshBtn.addEventListener("click", this.refresh.bind(this));
+    this.selectEl.addEventListener("change", this.filterTasks.bind(this));
   }
 
   addTask(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const inputValue = formData.get("add-task-input");
+    if (inputValue.length === 0) return;
 
     const task = {
       id: crypto.randomUUID(),
@@ -83,11 +87,13 @@ export class ToDoList {
   taskEdit(e) {
     const target = e.target;
     const taskItemEl = e.target.parentElement;
-    const tasksStorage = JSON.parse(localStorage.getItem('Tasks'));
-    const dateId = this.inputEL.value.split('-').join('');
-    const findTask = tasksStorage[dateId].find(t => t.id == taskItemEl.dataset.id);
+    const tasksStorage = JSON.parse(localStorage.getItem("Tasks"));
+    const dateId = this.inputEL.value.split("-").join("");
+    const findTask = tasksStorage[dateId].find(
+      (t) => t.id == taskItemEl.dataset.id
+    );
     findTask.text = target.value;
-    localStorage.setItem('Tasks', JSON.stringify(tasksStorage));
+    localStorage.setItem("Tasks", JSON.stringify(tasksStorage));
   }
 
   createMarkup(tasks) {
@@ -119,11 +125,21 @@ export class ToDoList {
     const tasksInputs = document.querySelectorAll("#task-input");
 
     tasksInputs.forEach((item) =>
-      item.addEventListener("blur", this.taskEdit.bind(this))
+      item.addEventListener("focus", (e) => {
+        const taskItemEl = e.target.parentElement;
+        taskItemEl.classList.add("focused");
+      })
     );
     tasksInputs.forEach((item) =>
-    item.addEventListener("keyup", this.taskEdit.bind(this))
-  );
+      item.addEventListener("blur", (e) => {
+        this.taskEdit.bind(this, e);
+        const taskItemEl = e.target.parentElement;
+        taskItemEl.classList.remove("focused");
+      })
+    );
+    tasksInputs.forEach((item) =>
+      item.addEventListener("keyup", this.taskEdit.bind(this))
+    );
     trashBtns.forEach((btn) =>
       btn.addEventListener("click", this.removeTask.bind(this))
     );
@@ -132,8 +148,52 @@ export class ToDoList {
     );
   }
 
-  renderTasks() {
+  setInitialSelect() {
+    const select = localStorage.getItem("Select");
+    if (select) {
+      this.selectEl.value = select;
+    }
+    this.filterTasks();
+  }
+
+  filterTasks() {
+    const selectedValue = this.selectEl.value;
+    localStorage.setItem("Select", selectedValue);
+    if (selectedValue !== "all") {
+      this.addTaskInput.setAttribute("disabled", true);
+    } else {
+      this.addTaskInput.removeAttribute("disabled");
+    }
+    const tasksStorage = JSON.parse(localStorage.getItem("Tasks"));
+    const dateId = this.inputEL.value.split("-").join("");
+    if (!tasksStorage || !tasksStorage[dateId]) return this.clearTasksList();
+    let filteredTasks = [];
+
+    switch (selectedValue) {
+      case "unfinished":
+        filteredTasks = tasksStorage[dateId].filter((t) => !t.completed);
+        break;
+      case "completed":
+        filteredTasks = tasksStorage[dateId].filter((t) => t.completed);
+        break;
+      case "all":
+        filteredTasks = tasksStorage[dateId];
+        break;
+    }
+
+    this.renderTasks(filteredTasks);
+  }
+
+  renderTasks(filteredTasks) {
     this.clearTasksList();
+    if (filteredTasks) {
+      const markup = this.createMarkup(filteredTasks);
+      this.tasksList.insertAdjacentHTML("beforeend", markup.join(""));
+
+      this.attachTasksEvents();
+      return;
+    }
+
     const tasks = JSON.parse(localStorage.getItem("Tasks"));
     if (!tasks) return;
     const currentDate = this.inputEL.value; //*
