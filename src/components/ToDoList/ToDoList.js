@@ -27,7 +27,7 @@ export class ToDoList {
     this.addingFormMessageEl.innerText = '';
     const formData = new FormData(e.target);
     const inputValue = formData.get("add-task-input");
-    if (inputValue.length === 0) {
+    if (inputValue.trim().length === 0) {
 
       this.addingFormMessageEl.innerText = 'Enter something...'
       return;
@@ -106,7 +106,7 @@ export class ToDoList {
       (t) => t.id == taskItemEl.dataset.id
     );
 
-    if(target.value === ''){
+    if(target.value.trim() === ''){
       target.value = findTask.text;
       return;
     }
