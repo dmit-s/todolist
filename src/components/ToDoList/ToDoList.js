@@ -6,6 +6,8 @@ export class ToDoList {
     this.tasksList = document.getElementById("tasks-list");
     this.refreshBtn = document.getElementById("refresh-tasks-btn");
     this.selectEl = document.getElementById("tasks-select");
+    this.addingFormMessageEl = document.getElementById('adding-form-message');
+
   }
 
   init() {
@@ -22,9 +24,14 @@ export class ToDoList {
 
   addTask(e) {
     e.preventDefault();
+    this.addingFormMessageEl.innerText = '';
     const formData = new FormData(e.target);
     const inputValue = formData.get("add-task-input");
-    if (inputValue.length === 0) return;
+    if (inputValue.length === 0) {
+
+      this.addingFormMessageEl.innerText = 'Enter something...'
+      return;
+    };
 
     const task = {
       id: crypto.randomUUID(),
@@ -85,13 +92,24 @@ export class ToDoList {
   }
 
   taskEdit(e) {
+    if(e.type === 'keyup'){
+      if(e.key !== 'Enter') return;
+    }
     const target = e.target;
     const taskItemEl = e.target.parentElement;
+    if(e.type === 'blur'){
+      taskItemEl.classList.remove("focused");
+    }
     const tasksStorage = JSON.parse(localStorage.getItem("Tasks"));
     const dateId = this.inputEL.value.split("-").join("");
     const findTask = tasksStorage[dateId].find(
       (t) => t.id == taskItemEl.dataset.id
     );
+
+    if(target.value === ''){
+      target.value = findTask.text;
+      return;
+    }
     findTask.text = target.value;
     localStorage.setItem("Tasks", JSON.stringify(tasksStorage));
   }
@@ -131,11 +149,12 @@ export class ToDoList {
       })
     );
     tasksInputs.forEach((item) =>
-      item.addEventListener("blur", (e) => {
-        this.taskEdit.bind(this, e);
-        const taskItemEl = e.target.parentElement;
-        taskItemEl.classList.remove("focused");
-      })
+      // item.addEventListener("blur", (e) => {
+      //   this.taskEdit.bind(this);
+        // const taskItemEl = e.target.parentElement;
+        // taskItemEl.classList.remove("focused");
+      // })
+      item.addEventListener("blur", this.taskEdit.bind(this))
     );
     tasksInputs.forEach((item) =>
       item.addEventListener("keyup", this.taskEdit.bind(this))

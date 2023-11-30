@@ -6,6 +6,7 @@
 .adding-form {
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .adding-form__input {
@@ -45,4 +46,14 @@
 
 .adding-form__btn:hover {
   color: #5561b7;
+}
+
+.adding-form__message{
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  width: 50%;
+  transform: translateX(-45%);
+  font-size: 1.2rem;
+  color: red;
 }
