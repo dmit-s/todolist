@@ -6,8 +6,7 @@ export class ToDoList {
     this.tasksList = document.getElementById("tasks-list");
     this.refreshBtn = document.getElementById("refresh-tasks-btn");
     this.selectEl = document.getElementById("tasks-select");
-    this.addingFormMessageEl = document.getElementById('adding-form-message');
-
+    this.addingFormMessageEl = document.getElementById("adding-form-message");
   }
 
   init() {
@@ -24,14 +23,13 @@ export class ToDoList {
 
   addTask(e) {
     e.preventDefault();
-    this.addingFormMessageEl.innerText = '';
+    this.addingFormMessageEl.innerText = "";
     const formData = new FormData(e.target);
     const inputValue = formData.get("add-task-input");
     if (inputValue.trim().length === 0) {
-
-      this.addingFormMessageEl.innerText = 'Enter something...'
+      this.addingFormMessageEl.innerText = "Enter something...";
       return;
-    };
+    }
 
     const task = {
       id: crypto.randomUUID(),
@@ -92,12 +90,12 @@ export class ToDoList {
   }
 
   taskEdit(e) {
-    if(e.type === 'keyup'){
-      if(e.key !== 'Enter') return;
+    if (e.type === "keyup") {
+      if (e.key !== "Enter") return;
     }
     const target = e.target;
     const taskItemEl = e.target.parentElement;
-    if(e.type === 'blur'){
+    if (e.type === "blur") {
       taskItemEl.classList.remove("focused");
     }
     const tasksStorage = JSON.parse(localStorage.getItem("Tasks"));
@@ -106,7 +104,7 @@ export class ToDoList {
       (t) => t.id == taskItemEl.dataset.id
     );
 
-    if(target.value.trim() === ''){
+    if (target.value.trim() === "") {
       target.value = findTask.text;
       return;
     }
@@ -149,11 +147,6 @@ export class ToDoList {
       })
     );
     tasksInputs.forEach((item) =>
-      // item.addEventListener("blur", (e) => {
-      //   this.taskEdit.bind(this);
-        // const taskItemEl = e.target.parentElement;
-        // taskItemEl.classList.remove("focused");
-      // })
       item.addEventListener("blur", this.taskEdit.bind(this))
     );
     tasksInputs.forEach((item) =>
